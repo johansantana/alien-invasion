@@ -1,0 +1,4 @@
+# Ignore cache and exercises from book directory
+
+__pycache__/
+exercises/
