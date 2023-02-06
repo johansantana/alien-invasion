@@ -15,7 +15,6 @@ class Button():
         # build the button's rect object and center it.
         self.rect.center = self.screen_rect.center
 
-        # the button message needs to be prepped only once.
     def draw_button(self):
         # Draw blank button and then draw message.
         self.screen.blit(self.image, self.rect)
