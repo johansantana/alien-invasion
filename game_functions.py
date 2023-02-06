@@ -56,7 +56,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
 
 def write_high_score(stats):
     """Save the high score to a file."""
-    with open('high_score.txt', 'w') as file:
+    with open('data/high_score.txt', 'w') as file:
         file.write(str(stats.high_score))
 
 

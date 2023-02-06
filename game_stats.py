@@ -21,7 +21,7 @@ class GameStats():
 
     def read_high_score(self):
         try:
-            with open('high_score.txt', 'r') as file:
+            with open('data/high_score.txt', 'r') as file:
                 self.high_score = int(file.read())
         except FileNotFoundError:
             self.high_score = 0
