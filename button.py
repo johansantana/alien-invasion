@@ -2,14 +2,14 @@ import pygame.font
 
 
 class Button():
-    def __init__(self, ai_settings, screen, img_path):
+    def __init__(self, ai_settings, screen, img_path, size):
         """Initialize button attributes."""
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
         # set the dimensions and properties of the button
-        self.image = pygame.image.load('images/play.png')
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.image = pygame.image.load(img_path)
+        self.image = pygame.transform.scale(self.image, size)
         self.rect = self.image.get_rect()
 
         # build the button's rect object and center it.

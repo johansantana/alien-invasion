@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 from pygame.sprite import Group
 
 from settings import Settings
@@ -21,6 +22,11 @@ def run_game():
     stats = GameStats(ai_settings)
     sb = Scoreboard(ai_settings, screen, stats)
 
+    # start music
+    pygame.mixer.music.load("sounds/bg_music.wav")
+    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.play(-1)
+
     ship = Ship(ai_settings, screen)
     # make a group to store bullets in
     bullets = Group()
@@ -32,7 +38,8 @@ def run_game():
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
     # make the play button
-    play_button = Button(ai_settings, screen, "Play")
+    play_button = Button(ai_settings, screen,
+                         img_path='images/play.png', size=(100, 100))
 
     # start the main loop for the game.
     while True:
