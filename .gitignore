@@ -1,4 +1,5 @@
-# Ignore cache and exercises from book directory
+# Ignore cache, localdata and exercises from book directory
 
 __pycache__/
 exercises/
+data/
