@@ -108,7 +108,7 @@ def start_game(ai_settings, screen, stats, sb, ship, aliens, bullets):
     ship.center_ship()
 
 
-def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, controls):
     """Update images on the screen and flip to the new screen"""
     screen.fill(ai_settings.bg_color)
 
@@ -119,9 +119,10 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_bu
     # Draw the score information
     sb.show_score()
 
-    # draw the play button if the game is inactive
+    # draw the play button and controls if the game is inactive
     if not stats.game_active:
         play_button.draw_button()
+        controls.show_controls()
 
     pygame.display.flip()
 
