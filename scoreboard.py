@@ -23,6 +23,7 @@ class Scoreboard():
         self.prep_images()
 
     def prep_images(self):
+        """Prepare all images."""
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
