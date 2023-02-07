@@ -20,11 +20,6 @@ def check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bu
         # create a new bullet and add it to the bullets group
         if stats.game_active:
             fire_bullet(ai_settings, screen, ship, bullets)
-        elif stats.lifes_left == 0:
-            start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
-        else:
-            stats.game_active = True
-            pygame.mixer.music.unpause()
     elif event.key == pygame.K_q:
         write_high_score(stats)
         sys.exit()
@@ -94,6 +89,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
 def start_game(ai_settings, screen, stats, sb, ship, aliens, bullets):
     # hide the mouse cursor
     pygame.mouse.set_visible(False)
+    pygame.mixer.music.unpause()
     # reset the game statistics
     stats.reset_stats()
     stats.game_active = True
@@ -124,7 +120,8 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_bu
     # draw the play button and controls if the game is inactive
     if not stats.game_active:
         play_button.draw_button()
-        controls.show_controls()
+        if stats.lifes_left != 0:
+            controls.show_controls()
 
     pygame.display.flip()
 
@@ -248,6 +245,7 @@ def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
         sleep(0.5)
     else:
         stats.game_active = False
+        pygame.mixer.music.pause()
         pygame.mouse.set_visible(True)
 
 
