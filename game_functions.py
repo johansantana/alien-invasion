@@ -22,6 +22,7 @@ def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullet
             fire_bullet(ai_settings, screen, ship, bullets)
         else:
             stats.game_active = True
+            pygame.mixer.music.unpause()
     elif event.key == pygame.K_q:
         write_high_score(stats)
         sys.exit()
@@ -80,8 +81,12 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         # Reset the game settings
-        ai_settings.initialize_dynamic_settings()
-        start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
+        if stats.score != 0:
+            stats.game_active = True
+            pygame.mixer.music.unpause()
+        else:
+            ai_settings.initialize_dynamic_settings()
+            start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 
 def start_game(ai_settings, screen, stats, sb, ship, aliens, bullets):
