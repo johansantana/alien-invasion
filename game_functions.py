@@ -1,9 +1,14 @@
 import sys
 import pygame
+import pygame.mixer
 from time import sleep
 
 from bullet import Bullet
 from alien import Alien
+
+# define sounds
+pygame.mixer.init()
+laser_sound = pygame.mixer.Sound('sounds/laser.wav')
 
 
 def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullets):
@@ -13,13 +18,22 @@ def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullet
         ship.movement_left = True
     elif event.key == pygame.K_SPACE:
         # create a new bullet and add it to the bullets group
-        fire_bullet(ai_settings, screen, ship, bullets)
+        if stats.game_active:
+            fire_bullet(ai_settings, screen, ship, bullets)
+        else:
+            stats.game_active = True
     elif event.key == pygame.K_q:
         write_high_score(stats)
         sys.exit()
     elif event.key == pygame.K_p:
         if not stats.game_active:
             start_game(ai_settings, screen, stats, ship, aliens, bullets)
+    elif event.key == pygame.K_ESCAPE and stats.score != 0:
+        stats.game_active = not stats.game_active
+        if not stats.game_active:
+            pygame.mixer.music.pause()
+        else:
+            pygame.mixer.music.unpause()
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -27,6 +41,7 @@ def fire_bullet(ai_settings, screen, ship, bullets):
     # Create a new bullet and add it to the bullet group
     if len(bullets) < ai_settings.bullets_allowed:
         new_bullet = Bullet(ai_settings, screen, ship)
+        pygame.mixer.Sound.play(laser_sound)
         bullets.add(new_bullet)
 
 
