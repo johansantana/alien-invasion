@@ -8,7 +8,7 @@ class Settings():
         self.pixel_size = 6.25
 
         # Ship settings
-        self.ship_limit = 3
+        self.life_limit = 3
 
         # Bullet settings
         self.bullet_width = self.pixel_size

@@ -75,7 +75,7 @@ class Scoreboard():
     def prep_hearts(self):
         """Show how many hearts are left."""
         self.hearts = Group()
-        for ship_number in range(self.stats.ships_left):
+        for ship_number in range(self.stats.lifes_left):
             heart = Heart(self.ai_settings, self.screen)
             heart.rect.x = 20 + ship_number * (heart.rect.width + 20)
             heart.rect.y = 20

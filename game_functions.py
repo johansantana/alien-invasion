@@ -11,7 +11,7 @@ pygame.mixer.init()
 laser_sound = pygame.mixer.Sound('sounds/laser.wav')
 
 
-def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullets):
+def check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bullets):
     if event.key == pygame.K_RIGHT:
         ship.movement_right = True
     elif event.key == pygame.K_LEFT:
@@ -20,6 +20,8 @@ def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullet
         # create a new bullet and add it to the bullets group
         if stats.game_active:
             fire_bullet(ai_settings, screen, ship, bullets)
+        elif stats.lifes_left == 0:
+            start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
         else:
             stats.game_active = True
             pygame.mixer.music.unpause()
@@ -28,7 +30,7 @@ def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullet
         sys.exit()
     elif event.key == pygame.K_p:
         if not stats.game_active:
-            start_game(ai_settings, screen, stats, ship, aliens, bullets)
+            start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
     elif event.key == pygame.K_ESCAPE and stats.score != 0:
         stats.game_active = not stats.game_active
         if not stats.game_active:
@@ -61,7 +63,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, screen,
-                                 stats, ship, aliens, bullets)
+                                 stats, sb, ship, aliens, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -81,7 +83,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         # Reset the game settings
-        if stats.score != 0:
+        if stats.score != 0 and stats.lifes_left != 0:
             stats.game_active = True
             pygame.mixer.music.unpause()
         else:
@@ -227,9 +229,9 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
-    if stats.ships_left > 0:
-        # Decrement ships_left
-        stats.ships_left -= 1
+    if stats.lifes_left > 0:
+        # Decrement lifes_left
+        stats.lifes_left -= 1
 
         # Update scoreboard
         sb.prep_hearts()
