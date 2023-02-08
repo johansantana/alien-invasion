@@ -9,6 +9,7 @@ from alien import Alien
 # define sounds
 pygame.mixer.init()
 laser_sound = pygame.mixer.Sound('sounds/laser.wav')
+ship_hit_sound = pygame.mixer.Sound('sounds/ship_hit.wav')
 
 
 def check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bullets):
@@ -226,6 +227,7 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
+    pygame.mixer.Sound.play(ship_hit_sound)
     if stats.lifes_left > 0:
         # Decrement lifes_left
         stats.lifes_left -= 1
