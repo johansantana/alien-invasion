@@ -53,7 +53,7 @@ while True:
         gf.update_bullets(ai_settings, screen, stats,
                           sb, ship, aliens, bullets)
         gf.update_aliens(ai_settings, stats, screen,
-                         sb, ship, aliens, bullets, game_over_title)
+                         sb, ship, aliens, bullets)
 
     gf.update_screen(ai_settings, screen, stats, sb, ship,
-                     aliens, bullets, play_button, controls)
+                     aliens, bullets, play_button, controls, game_over_title)

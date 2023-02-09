@@ -18,6 +18,7 @@ class GameStats():
         self.lifes_left = self.ai_settings.life_limit
         self.score = 0
         self.level = 1
+        self.game_over = False
 
     def read_high_score(self):
         try:

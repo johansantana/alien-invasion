@@ -103,7 +103,7 @@ class GameOver():
         # Font settings for game over title
         self.text_color = 255, 255, 255
         self.font = pygame.font.Font(
-            os.path.join("fonts", "Mouse.otf"), 42)
+            os.path.join("fonts", "ThaleahFat.ttf"), 78)
 
         text = 'Game Over'
         self.text_image = self.font.render(text, True, self.text_color)
