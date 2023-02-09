@@ -8,7 +8,7 @@ import game_functions as gf
 from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
-from controls import Controls
+from extras import Controls, GameOver
 
 # initializes game and create screen object
 pygame.init()
@@ -40,7 +40,8 @@ gf.create_fleet(ai_settings, screen, ship, aliens)
 # make the play button
 play_button = Button(ai_settings, screen,
                      img_path='images/play.png', size=(100, 100))
-controls = Controls(ai_settings, screen, play_button)
+controls = Controls(screen, play_button)
+game_over_title = GameOver(screen)
 
 # start the main loop for the game.
 while True:
@@ -52,7 +53,7 @@ while True:
         gf.update_bullets(ai_settings, screen, stats,
                           sb, ship, aliens, bullets)
         gf.update_aliens(ai_settings, stats, screen,
-                         sb, ship, aliens, bullets)
+                         sb, ship, aliens, bullets, game_over_title)
 
     gf.update_screen(ai_settings, screen, stats, sb, ship,
                      aliens, bullets, play_button, controls)

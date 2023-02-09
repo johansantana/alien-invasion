@@ -225,7 +225,7 @@ def change_fleet_direction(ai_settings, aliens):
     ai_settings.fleet_direction *= -1
 
 
-def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
+def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets, game_over_title):
     """Respond to ship being hit by alien."""
     pygame.mixer.Sound.play(ship_hit_sound)
     if stats.lifes_left > 0:
@@ -249,29 +249,33 @@ def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
         stats.game_active = False
         pygame.mixer.music.pause()
         pygame.mouse.set_visible(True)
+        game_over_title.draw_text()
 
 
-def check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets):
+def check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets, game_over_title):
     """Check if any aliens have reached the bottom of the screen."""
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
             # Treat this the same as if the ship got hit.
-            ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets)
+            ship_hit(ai_settings, stats, screen, sb, ship,
+                     aliens, bullets, game_over_title)
             break
 
 
-def update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets):
+def update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets, game_over_title):
     """Update the positions of all aliens in the fleet."""
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
 
     # Look for alien-ship collisions.
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets)
+        ship_hit(ai_settings, stats, screen, sb, ship,
+                 aliens, bullets, game_over_title)
 
     # Look for aliens hitting the bottom of the screen
-    check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets)
+    check_aliens_bottom(ai_settings, stats, screen, sb,
+                        ship, aliens, bullets, game_over_title)
 
 
 def check_high_scores(stats, sb):

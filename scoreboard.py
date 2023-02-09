@@ -2,7 +2,7 @@ import pygame.font
 import os
 from pygame.sprite import Group
 
-from heart import Heart
+from extras import Heart
 
 
 class Scoreboard():
@@ -17,7 +17,7 @@ class Scoreboard():
 
         # Font settings for scoring information
         self.text_color = 255, 255, 255
-        self.font = pygame.font.Font(os.path.join("font", "Mouse.otf"), 24)
+        self.font = pygame.font.Font(os.path.join("fonts", "Mouse.otf"), 24)
 
         # Prepare the initial score images
         self.prep_images()
