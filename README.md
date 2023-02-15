@@ -1,6 +1,6 @@
 # Space Shooter Game with Pygame
 
-This is a Space Shooter-style game made in Python using the Pygame library. Follow these steps to run the game.
+This is a Space Shooter-style game made in Python using the Pygame library. This game is based on a project from the book "Python Crash Course" with a few features and personal look and feel. Follow these steps to run the game.
 
 ## Running the game
 
